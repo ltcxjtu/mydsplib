@@ -1,0 +1,9 @@
+clear all;
+SAMPLES_PER_FRAME=400;%25ms*16K
+NB_MICROPHONES=7;
+RAW_BUFFER_SIZE=SAMPLES_PER_FRAME*NB_MICROPHONES;
+audio_float_data=zeros(NB_MICROPHONES,SAMPLES_PER_FRAME);
+fileId = fopen('rawdata_2srcs_90_90.raw','r');
+audio_raw_data = fread(fileId,inf,'int16');
+nFrame=round(length(audio_raw_data)/(SAMPLES_PER_FRAME*NB_MICROPHONES));
+frameNumber=1;

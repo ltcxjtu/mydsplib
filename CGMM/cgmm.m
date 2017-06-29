@@ -1,0 +1,2 @@
+function gmm=cgmmInit()
+end

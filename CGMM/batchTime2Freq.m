@@ -6,7 +6,6 @@ function signals = batchTime2Freq(signals,NB_MICROPHONES)
 		batchfreq(:,:,Index)=signals.framedata_freq';
     end
     signals.batchfreq = batchfreq;
-
 end
 
 function signals = frameTime2Freq(signals)

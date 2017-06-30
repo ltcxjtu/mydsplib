@@ -17,4 +17,27 @@ for frameNumber=1:nFrame-1
     end
     micarray.signals = dataUpdate(micarray.signals,SAMPLES_PER_FRAME,audio_float_data); 
     micarray.signals = batchTime2Freq( micarray.signals,NB_MICROPHONES);
+    if frameNumber>=100
+        % the number of freq;
+        NB_freq = micarray.signals.SAMPLES_PER_FRAME;
+        NB_Guass = 2;
+        maxIter = 20;
+        meane = 0;
+        alphan  = 1/NB_Guass*ones(NB_Guass,1);
+        for i = 1:NB_freq
+            dataSet = micarray.signals.batchfreq(i,:,:);
+            [lenc,lena,lenb,] = size(dataSet);
+            dataSet=reshape(dataSet,lena,lenb);
+            % signal and noise spatial correlation matrics initial;
+            R(:,:,1) = dataSet(lena/2,:)'*conj(dataSet(lena/2,:));
+            R(:,:,2) = diag(ones(lenb,1),0);
+            for Index=1:lena
+                for i=1:NB_Guass
+                    fai(Index,i) = 1/lenb*trace(dataSet(Index,:)'*conj(dataSet(Index,:))*R(:,:,i));
+                end
+            end	
+            cgmm = cgmmInit(dataSet,NB_Guass,maxIter,meane,alphan,fai,R);
+            cgmm=cgmmProcess(cgmm);
+        end
+    end
 end

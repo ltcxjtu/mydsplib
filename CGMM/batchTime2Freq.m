@@ -5,7 +5,9 @@ function signals = batchTime2Freq(signals,NB_MICROPHONES)
 		signals = frameTime2Freq(signals);
 		batchfreq(:,:,Index)=signals.framedata_freq';
     end
-    signals.batchfreq = batchfreq;
+    for Index=1:NB_MICROPHONES
+    	signals.batchfreq(:,:,Index) = batchfreq(:,Index,:);
+    end
 end
 
 function signals = frameTime2Freq(signals)

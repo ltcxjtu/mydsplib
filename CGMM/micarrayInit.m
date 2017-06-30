@@ -5,7 +5,7 @@ function micarray=micarrayInit()
     micarray.signals.SAMPLES_PER_BATCH = 4000;%250ms*16K
     micarray.signals.framedata = zeros(micarray.signals.SAMPLES_PER_FRAME,micarray.NB_MICROPHONES)';
     micarray.signals.batchdata = zeros(micarray.signals.SAMPLES_PER_BATCH,micarray.NB_MICROPHONES)';
-    % Samples for train CGMM;400 X 7 X 40;freq X dimensions X number_samples ;
+    % Samples for train CGMM;400 X 40 X 7;freq  X number_samples X dimensions;
     micarray.signals.batchfreq = zeros(micarray.signals.SAMPLES_PER_FRAME,...
-    	micarray.NB_MICROPHONES,micarray.signals.SAMPLES_PER_BATCH/micarray.signals.shiftSize);
+    	,micarray.signals.SAMPLES_PER_BATCH/micarray.signals.shiftSize,micarray.NB_MICROPHONES);
 end

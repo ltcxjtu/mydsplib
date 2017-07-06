@@ -26,7 +26,7 @@ for frameNumber=1:nFrame-1
         alphan  = 1/NB_Guass*ones(NB_Guass,1);
         for i = 1:NB_freq
             dataSet = micarray.signals.batchfreq(i,:,:);
-            [lenc,lena,lenb,] = size(dataSet);
+            [lenc,lena,lenb] = size(dataSet);
             dataSet=reshape(dataSet,lena,lenb);
             % signal and noise spatial correlation matrics initial;
             R(:,:,1) = dataSet(lena/2,:)'*conj(dataSet(lena/2,:));
